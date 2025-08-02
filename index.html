@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phone Video Player</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: pink;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .flower {
+      width: 100px;
+      height: 200px;
+      background-image: url('https://cdn.pixabay.com/photo/2017/01/31/20/11/roses-2023280_960_720.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    @keyframes growFlower {
+      from {
+        opacity: 0;
+        transform: scale(0);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .grow {
+      animation: growFlower 1s ease forwards;
+    }
+
+    .phone {
+      width: 300px;
+      height: 600px;
+      background: #333;
+      border-radius: 40px;
+      padding: 20px 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .top-notch {
+      width: 100px;
+      height: 30px;
+      background: #222;
+      border-radius: 0 0 20px 20px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .screen {
+      width: 100%;
+      height: 80%;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .heart-button {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 28px;
+      color: red;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="flower" id="flower"></div>
+
+    <div class="phone">
+      <div class="top-notch"></div>
+
+      <div class="screen">
+        <video id="video" preload="metadata">
+          <source src="2025-08-02_21:35:14_video.MP4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="buttons">
+        <button class="heart-button" onclick="playVideo()">❤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function playVideo() {
+      const video = document.getElementById('video');
+      const flower = document.getElementById('flower');
+
+      video.play();
+
+      // Reset flower animation by removing and re-adding the class
+      flower.classList.remove('grow');
+      void flower.offsetWidth; // Trigger reflow
+      flower.classList.add('grow');
+    }
+  </script>
+
+</body>
+</html>
